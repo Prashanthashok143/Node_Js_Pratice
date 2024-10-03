@@ -7,12 +7,14 @@ mongoose
   //Schema
 
   const skillsSchema=new mongoose.Schema({
-    name:{type:String,require:true},
+
+    // validation
+    name:{type:String,required:true},
     Phone:Number,
-    skill1:{type:String,require:true},
-    skill2:{type:String,require:true},
-    skill3:{type:String,require:true},
-    rating:{type:String,require:true},
+    skill1:{type:String,required:true},
+    skill2:{type:String,required:true},
+    skill3:{type:String,required:true},
+    rating:{type:String,required:true},
   })
 
   
@@ -24,13 +26,24 @@ mongoose
 async function skillsData() {
       
   const Skills=new skillsModel({
-    name:"Prashanth Shanigarapu",
-    Phone:9542788305,
+    name:"venkatanarsaiah Shanigarapu",
+    Phone:9542788395,
+    skill1:"Fullstack",
+    skill2:"Python",
+    skill3:"java",
+    rating:3.8,
+
    
   })
 
-
-  const result= await Skills.save();
-  console.log(result);
+   try {
+  const result=  await Skills.save();
+  console.log(result)
+ 
+  // await Skills.validate()
+  // instead of these , we can use await Skills.validate() to validate the errors
+   } catch (error) {
+    console.error(error.message)
+   }
 }
 skillsData();
