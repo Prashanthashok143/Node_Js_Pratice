@@ -15,6 +15,7 @@ async function pwdValidate(input){
 
   exports.register=async(req,res)=>{
     const {name,email,password}=req.body;
+    const pp =req.file
     if(!name || !email || !password){
         return res.status(404).send({message:"Please fill all the details"})
     }
@@ -26,7 +27,8 @@ async function pwdValidate(input){
     const User=new userModel({
         name:name,
         email:email,
-        password:encrypt
+        password:encrypt,
+        Profile:pp.path,
     })
     await User.save();
     console.log(User)
