@@ -1,6 +1,7 @@
 const userModel=require("../models/userModel");
 const bcrypt=require("bcrypt");
-
+const jwt=require("jsonwebtoken");
+const Secret_Key="PrashanthShanigarapu";
 async function comparePwd(input,hashedPwd){
     try{
         return await bcrypt.compare(input,hashedPwd)
@@ -24,5 +25,6 @@ exports.login=async(req,res)=>{
    if(!pwdCompare){
     return res.status(404).send({message:"password not matched"})
    }
-   res.send({message:"Login suucessfully"})
+   const token=jwt.sign({id:emailValidate._id,email:emailValidate.email},Secret_Key)
+   res.send({message:"Login suucessfully",email:emailValidate.email,token:token})
 }

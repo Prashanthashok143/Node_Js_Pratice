@@ -3,6 +3,8 @@ const router=express.Router();
 // const userControllers=require("../controllers/userController");
 const {register}=require("../controllers/register");
 const {login}=require("../controllers/login");
+const {getUsers}=require("../controllers/getUsers");
+const {verifyToken}=require("../middlewares/verifyToken")
 const multer= require("multer");
 
 const storage=multer.diskStorage({
@@ -18,4 +20,5 @@ const upload=multer({
 })
 router.post("/register",upload.single("Profile"),register);
 router.post("/login",login);
+router.get("/users",verifyToken,getUsers) 
 module.exports=router;
